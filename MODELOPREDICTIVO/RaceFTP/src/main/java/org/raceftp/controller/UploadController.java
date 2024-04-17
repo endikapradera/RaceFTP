@@ -107,15 +107,10 @@ public class UploadController {
                     count++;
                 }
             }
-            // Después de procesar todos los intervalos de 5 minutos
-            long activityDuration = endTime - startTime; // Duración total de la actividad
-            long processedIntervalSum = trackpointDataList.size() * interval; // Suma de los intervalos de 5 minutos procesados
-            long remainingMinutes = (activityDuration - processedIntervalSum) / (60 * 1000); // Minutos restantes
+
             List<ProcessedTrackPoint> processedTrackPointList = processTrackPointDataList(trackpointDataList, porcentaje);
             // Agregar la lista de puntos de seguimiento procesados al modelo
             model.addAttribute("processedTrackPointList", processedTrackPointList);
-            // Agregar los minutos restantes al modelo para mostrar en la vista
-            model.addAttribute("remainingMinutes", remainingMinutes);
             // Agregar los datos al modelo para mostrar en la vista
             model.addAttribute("trackpointDataList", trackpointDataList);
             model.addAttribute("ftpValue", ftp);
@@ -171,6 +166,8 @@ public class UploadController {
             }
             // Calcular los vatios equivalentes si la frecuencia cardíaca es superior al máximo
             int watts = heartRate > maxHeartRate ? (adjustedWatts * heartRate) / maxHeartRate : 0;
+            // Calcular los vatios equivalentes si la frecuencia cardíaca es inferior al máximo
+            watts = heartRate < maxHeartRate ? (adjustedWatts * heartRate) / maxHeartRate : watts;
             // Crear un nuevo objeto ProcessedTrackPoint con los datos procesados
             ProcessedTrackPoint processedTrackPoint = new ProcessedTrackPoint("5 minutos", heartRate, watts);
 
