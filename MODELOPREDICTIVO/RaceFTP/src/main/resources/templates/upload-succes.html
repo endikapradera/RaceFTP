@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subida Exitosa</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4">¡Subida Exitosa!</h1>
+    <p>FTP Máximo: <strong th:text="${ftpValue}"></strong></p>
+    <p>Edad: <strong th:text="${edad}"></strong></p>
+    <p>Porcentaje estimado: <strong th:text="${porcentaje}"></strong></p>
+
+    <h2 class="mt-4">Datos carrera</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>Speed</th>
+                <th>Heart Rate</th>
+                <th>Distance</th>
+                <th>Watios</th>
+                <th>Edad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="trackpointData : ${trackpointDataList}">
+                <td th:text="${trackpointData.time}"></td>
+                <td th:text="${trackpointData.speed}"></td>
+                <td th:text="${trackpointData.heartRate}"></td>
+                <td th:text="${trackpointData.distance}"></td>
+                <td th:text="${trackpointData.ftp}"></td>
+                <td th:text="${trackpointData.age}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="mt-4">Datos Simulación carrera</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>Heart Rate Estimated</th>
+                <th>Watios</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="processedTrackPoint : ${processedTrackPointList}">
+                <td th:text="${processedTrackPoint.time}"></td>
+                <td th:text="${processedTrackPoint.heartRate}"></td>
+                <td th:text="${processedTrackPoint.ftp}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Después de completar tu sesión de entrenamiento, es importante dedicar tiempo al enfriamiento post-entreno. Se
+        recomienda reservar al menos 5 a 10 minutos para este propósito. Durante este período, tu objetivo principal es
+        reducir gradualmente la intensidad del ejercicio y permitir que tu cuerpo regrese a un estado de reposo. Este
+        tiempo te brinda la oportunidad de realizar estiramientos suaves para relajar los músculos que has trabajado y
+        ayudar en el proceso de recuperación. Además, el enfriamiento post-entreno puede ayudar a prevenir lesiones y
+        mejorar la flexibilidad a largo plazo. No subestimes la importancia de este paso final en tu rutina de
+        entrenamiento.</p>
+
+</div>
+
+
+</div>
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

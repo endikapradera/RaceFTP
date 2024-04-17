@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo Predictivo para Ciclismo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4">Modelo Predictivo para Ciclismo</h1>
+    <p>Somos un modelo predictivo diseñado para replicar segmentos de ciclismo en situaciones de competición.</p>
+    <p>FTP (Functional Threshold Power) es el máximo poder de salida sostenible que un ciclista puede mantener durante
+        una
+        hora.</p>
+    <p>Por favor, sube tu archivo de entrenamiento y especifica tu FTP máximo:</p>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="archivo">Archivo de entrenamiento:</label>
+            <input type="file" class="form-control-file" id="archivo" name="archivo">
+        </div>
+        <div class="form-group">
+            <label for="ftp">FTP Máximo:</label>
+            <input type="text" class="form-control" id="ftp" name="ftp">
+        </div>
+        <div class="form-group">
+            <label for="edad">Edad:</label>
+            <input type="text" class="form-control" id="edad" name="edad">
+        </div>
+        <div class="form-group">
+            <label for="porcentaje">Porcentaje de mejora:</label>
+            <input type="number" class="form-control" id="porcentaje" name="porcentaje" min="-20" max="20" step="1">
+            <small id="porcentajeHelp" class="form-text text-muted">Introduce un número entre -20 y 20 para representar
+                el porcentaje de mejora.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Subir</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
