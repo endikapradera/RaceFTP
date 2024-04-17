@@ -4,14 +4,14 @@ public class TrackPointData {
     private String time;
     private double speed;
     private int heartRate;
-    private int distance;
+    private double  distance;
     private int age;
     private int ftp;
 
     public TrackPointData() {
     }
 
-    public TrackPointData(String time, double speed, int heartRate, int distance, int age, int ftp) {
+    public TrackPointData(String time, double speed, int heartRate, double distance, int age, int ftp) {
         this.time = time;
         this.speed = speed;
         this.heartRate = heartRate;
@@ -61,11 +61,11 @@ public class TrackPointData {
         this.ftp = ftp;
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
     }
 

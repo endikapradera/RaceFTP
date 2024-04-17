@@ -52,7 +52,7 @@ public class UploadController {
             // Variables para calcular la media
             int totalSpeed = 0;
             int totalHeartRate = 0;
-            int totalDistance = 0;
+            double totalDistance = 0;
             int count = 0;
 
             // Variables para el seguimiento de los intervalos de tiempo
@@ -71,14 +71,14 @@ public class UploadController {
                     Node timeNode = element.getElementsByTagName("Time").item(0);
                     String time = timeNode != null ? timeNode.getTextContent() : "N/A";
 
-                    Node speedNode = element.getElementsByTagName("Speed").item(0);
-                    double speed = speedNode != null ? Double.parseDouble(speedNode.getTextContent()) : 0.0;
+                    //Node speedNode = element.getElementsByTagName("Speed").item(0);
+                    double speed = getSpeedValue(element);
 
                     Node heartRateNode = element.getElementsByTagName("HeartRateBpm").item(0);
                     int heartRate = heartRateNode != null ? Integer.parseInt(heartRateNode.getTextContent().trim()) : 0;
 
                     Node distanceNode = element.getElementsByTagName("DistanceMeters").item(0);
-                    int distance = distanceNode != null ? Integer.parseInt(distanceNode.getTextContent().trim()) : 0;
+                    double distance = distanceNode != null ? Double.parseDouble(distanceNode.getTextContent().trim()) : 0.0;
 
 
                     // Calcular la distancia total y el ritmo cardíaco promedio
@@ -134,6 +134,22 @@ public class UploadController {
             return "error";
         }
     }
+    // Método auxiliar para obtener el valor de Speed independientemente del prefijo del namespace
+    private double getSpeedValue(Element element) {
+        Node speedNode = element.getElementsByTagName("Speed").item(0);
+        if (speedNode == null) {
+            speedNode = element.getElementsByTagNameNS("ns3", "Speed").item(0);
+            if (speedNode != null) {
+                // Convertir de m/s a km/h y redondear a dos decimales
+                return Math.round(Double.parseDouble(speedNode.getTextContent()) * 3.6 * 100.0) / 100.0;
+            }
+        } else {
+            // Convertir de m/s a km/h y redondear a dos decimales
+            return Math.round(Double.parseDouble(speedNode.getTextContent()) * 3.6 * 100.0) / 100.0;
+        }
+        return 0.0; // Devolver 0.0 si no se encuentra ningún nodo de velocidad
+    }
+
 
 
     // Método para convertir la cadena de tiempo en milisegundos
@@ -150,7 +166,7 @@ public class UploadController {
         List<ProcessedTrackPoint> processedTrackPointList = new ArrayList<>();
 
         for (int i = 0; i < trackpointDataList.size(); i++) {
-            
+
             TrackPointData trackPointData = trackpointDataList.get(i);
             int maxHeartRate = 220 - trackPointData.getAge();
             int heartRate = trackPointData.getHeartRate();
