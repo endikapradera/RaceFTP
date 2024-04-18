@@ -8,3 +8,4 @@ Ajuste de Simulacro de Carrera: La opción de ajustar el simulacro de carrera de
 
 CREAR CUENTA EN HEROKU Y DESPLEGAR SPRINGBOOT : 
 https://www.youtube.com/watch?v=u-WkRMYhFb0
+![image](https://github.com/endikapradera/RaceFTP/assets/72379157/388ac4b4-9507-4ba1-ba0c-e768f5be0e00)
